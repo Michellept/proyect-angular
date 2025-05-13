@@ -7,6 +7,7 @@ import { ListTaskComponent } from './components/list-task/list-task.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusTaksDirective } from './directives/status-taks.directive';
+import { ConfirmDeleteDirective } from './directives/confirm-delete.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { StatusTaksDirective } from './directives/status-taks.directive';
     AppComponent,
     AddComponent,
     ListTaskComponent,
-    StatusTaksDirective
+    StatusTaksDirective,
+    ConfirmDeleteDirective
   ],
   imports: [
     BrowserModule,

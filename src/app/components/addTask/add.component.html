@@ -1,15 +1,18 @@
-<h1 class="number-task" [ngClass]="{'r1-5': numberTanks>=1 && numberTanks<=5, 'r5-10': numberTanks>=6 && numberTanks<=10, 'r10-15': numberTanks>=11 }"> N° de Tareas {{ numberTanks }}</h1>
+<h1 class="number-task"
+  [ngClass]="{'r1-5': numbertask>=1 && numbertask<=5, 'r5-10': numbertask>=6 && numbertask<=10, 'r10-15': numbertask>10 }">
+  N° de Tareas {{ numbertask }}</h1>
 <span [ngStyle]="{ color: isActive ? 'green' : 'red' }">Titulo de Tarea: {{ taskForm.get('taskName')?.value }}</span>
 <div>
-  <span *ngIf="isActive" class="active"> No puedes agregar una tarea sin nombre
-  </span>
+  <span *ngIf="isActive" class="active"> No puedes agregar una tarea sin nombre</span>
 </div>
 
-<form [formGroup]="taskForm" (ngSubmit)="addTask()"> <!-- Data Binding - Event Binding (ngSubmit) -->
-  <input formControlName="taskName" placeholder="Nueva tarea">
+<form class="container-input" [formGroup]="taskForm" (ngSubmit)="addTask()">
+  <!-- Data Binding - Event Binding (ngSubmit) -->
+  <input formControlName="taskName" placeholder="agrega una nueva tarea">
 
 
-  <div *ngIf="taskForm.get('taskName')?.invalid && taskForm.get('taskName')?.touched && taskForm.get('taskName')?.dirty">
+  <div
+    *ngIf="taskForm.get('taskName')?.invalid && taskForm.get('taskName')?.touched && taskForm.get('taskName')?.dirty">
     <p class="error" *ngIf="taskForm.get('taskName')?.errors?.['minlength']">
       El nombre debe tener al menos 3 letras.
     </p>
@@ -18,11 +21,19 @@
       El nombre es requerido.
     </p>
   </div>
-  <button type="submit" [disabled]="taskForm.invalid">Agregar tarea</button>
+  <button type="submit" [disabled]="taskForm.invalid" >Agregar tarea</button>
   <!-- Data Binding - Property Binding ([disabled]) -->
 </form>
 
- <div *ngFor="let tank of tanks">
-  <p>{{ tank.name }}</p>
-
-</div> 
+<h2>Tareas</h2>
+<div class="container-tasks" [ngStyle]="{ 'justify-content': task.length === 0 ? 'center' : '' }">
+  <div class="task" *ngFor="let task of task ; let i = index">
+    <p>{{i + 1}}</p>
+    <span [ngClass]="{ subrayar: task.completed }" [appStatusTaks]="task.completed">{{ task.title}}</span>
+    <input type="checkbox" class="task-check" [checked]="task.completed" (change)="markTaskCompleted(task)">
+    <button class="task_delete" (click)="delete(task.id)" [appConfirmDelete]="task.title">Eliminar</button>
+  </div>
+  <span [ngStyle]="{ color: 'red' }" *ngIf="task.length === 0">
+    No hay tareas
+  </span>
+</div>

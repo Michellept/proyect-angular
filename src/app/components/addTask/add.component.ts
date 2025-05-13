@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Task } from '../../models/task.interface';
 
 @Component({
   selector: 'app-add-task',
@@ -10,23 +11,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddComponent implements OnInit {
   @Output() taskCreated = new EventEmitter<string>();
   taskForm!: FormGroup;
-
-  numberTanks: number = 10;
-  isActive: boolean = true;
+  isActive!: boolean;
   taskActive!: boolean;
 
-  tanks:any[] = [
-    { name: 'tank1', id: 1 },
-    { name: 'tank2', id: 2 },
-    { name: 'tank3', id: 3 },
-    { name: 'tank4', id: 4 },
-    { name: 'tank5', id: 5 },
-    { name: 'tank6', id: 6 },
-    { name: 'tank7', id: 7 },
-    { name: 'tank8', id: 8 },
-    { name: 'tank9', id: 9 },
-    { name: 'tank10', id: 10 },
+  task: Task[] = [
+    { id: 1, title: 'Tarea 1', completed: false },
+    { id: 2, title: 'Tarea 2', completed: true },
+    { id: 3, title: 'Tarea 3', completed: false },
+    { id: 4, title: 'Tarea 4', completed: true },
+    { id: 5, title: 'Tarea 5', completed: false },
+    
   ]
+
+    numbertask: number = this.task.length;
 
   constructor(private fb: FormBuilder) {}
 
@@ -38,8 +35,16 @@ export class AddComponent implements OnInit {
   }
 
   addTask() {
+    
     if (this.taskForm.valid && this.taskForm.get('taskName')?.value !== '') {
       this.taskActive = false;
+      const taskName = this.taskForm.get('taskName')?.value;
+      const newTask: Task = {
+        id: this.task.length + 1,
+        title: taskName,
+        completed: false,
+      };
+      this.task.push(newTask);
 
       //     this.taskCreated.emit(this.taskForm.value.taskName);
       //     this.taskForm.reset();
@@ -51,4 +56,15 @@ export class AddComponent implements OnInit {
   ngOnDestroy(): void {
     console.log('bye, componente add task');
   }
+
+  markTaskCompleted(task: Task):void {
+    task.completed = !task.completed;
+    
+  }
+
+  delete(id:number):void {
+    this.task = this.task.filter(task => task.id !== id);
+    this.numbertask = this.task.length;
+  }
+
 }
