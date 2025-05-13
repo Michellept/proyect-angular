@@ -1,6 +1,10 @@
 <router-outlet></router-outlet>
 
 <div class="app">
-<app-add-task (taskCreated)="onTaskAdded($event)"></app-add-task>
-<app-list-task [tasks]="tasks"></app-list-task>
+  <app-add-task (taskCreated)="onTaskAdded($event)"></app-add-task>
+  <app-list-task
+    [listTasks]="tasks"
+    (taskCompleted)="markTaskAsCompleted($event)"
+    (taskDeleted)="deleteTask($event)"
+  ></app-list-task>
 </div>

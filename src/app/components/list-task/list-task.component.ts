@@ -1,30 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Task } from '../../models/task.interface';
 
 @Component({
   selector: 'app-list-task',
   templateUrl: './list-task.component.html',
   styleUrl: './list-task.component.scss'
 })
-export class ListTaskComponent implements OnInit {
-  @Input() tasks: string[] = []; 
+export class ListTaskComponent{
+  @Input('listTasks') tasks:Task [] = [];
+  @Output() taskCompleted: EventEmitter<Task> = new EventEmitter();
+  @Output() taskDeleted: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('task-list component initialized');
-  }
 
-  ngOnChanges(): void {
-    // Este hook se ejecuta cuando hay cambios en los datos vinculados.
-    console.log('task-list component changes detected');
-  }
+  completeTask(task: Task): void {
+    this.taskCompleted.emit(task);
 
-  ngOnDestroy(): void {
-    // Este hook se ejecuta cuando el componente está por ser destruido.
-    console.log('task-list component destroyed');
   }
-
-  addTask(task: string): void {
-    this.tasks.push(task);
+  deleteTask(id: number): void {
+    this.taskDeleted.emit(id);
   }
 }

@@ -9,23 +9,11 @@ import { Task } from '../../models/task.interface';
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
-  @Output() taskCreated = new EventEmitter<string>();
+  @Output() taskCreated: EventEmitter<Task> = new EventEmitter<Task>();
   taskForm!: FormGroup;
-  isActive!: boolean;
   taskActive!: boolean;
 
-  task: Task[] = [
-    { id: 1, title: 'Tarea 1', completed: false },
-    { id: 2, title: 'Tarea 2', completed: true },
-    { id: 3, title: 'Tarea 3', completed: false },
-    { id: 4, title: 'Tarea 4', completed: true },
-    { id: 5, title: 'Tarea 5', completed: false },
-    
-  ]
-
-    numbertask: number = this.task.length;
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     // Inicializar el formulario, Formulario reactivo
@@ -35,19 +23,16 @@ export class AddComponent implements OnInit {
   }
 
   addTask() {
-    
-    if (this.taskForm.valid && this.taskForm.get('taskName')?.value !== '') {
-      this.taskActive = false;
-      const taskName = this.taskForm.get('taskName')?.value;
-      const newTask: Task = {
-        id: this.task.length + 1,
-        title: taskName,
-        completed: false,
-      };
-      this.task.push(newTask);
 
-      //     this.taskCreated.emit(this.taskForm.value.taskName);
-      //     this.taskForm.reset();
+    if (this.taskForm.valid && this.taskForm.get('taskName')?.value !== '') {
+      const newTask: Task = {
+        id: Math.floor(Math.random() * 1000),
+        title: this.taskForm.get('taskName')?.value,
+        completed: false,
+      }
+      this.taskActive = false;
+      this.taskCreated.emit(newTask);
+      this.taskForm.reset();
     } else {
       this.taskActive = true;
     }
@@ -55,16 +40,6 @@ export class AddComponent implements OnInit {
 
   ngOnDestroy(): void {
     console.log('bye, componente add task');
-  }
-
-  markTaskCompleted(task: Task):void {
-    task.completed = !task.completed;
-    
-  }
-
-  delete(id:number):void {
-    this.task = this.task.filter(task => task.id !== id);
-    this.numbertask = this.task.length;
   }
 
 }
