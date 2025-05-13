@@ -1,0 +1,38 @@
+.add-task {
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 5px 10px;
+  }
+  
+
+  .r1-5 {
+    color: red;
+  }
+
+  .r5-10 {
+    
+    color: orange;
+  }
+
+  .r10-15 {
+    color: green;
+  }
+
+  .number-task{
+  position: absolute;
+  right: 10px;
+  background-color: azure;
+  color: gray;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: .6em;
+}
