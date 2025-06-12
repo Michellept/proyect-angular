@@ -1,6 +1,9 @@
-import { CanActivateChildFn, Router, CanActivate, mapToCanActivateChild, CanActivateChild } from '@angular/router';
+import { Router, CanActivateChild } from '@angular/router';
 import { TasksService } from '../services/tasks.service';
-
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root',
+})
 export class authGuardChildGuard implements CanActivateChild {
 
   constructor(private service: TasksService, private router: Router) { }

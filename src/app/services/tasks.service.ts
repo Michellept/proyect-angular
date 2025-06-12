@@ -15,7 +15,7 @@ export class TasksService {
   taskDeletedChanged = new Subject<Task[]>();
 
   isAuthenticated : boolean = false; 
-  token:boolean = false;
+  token:boolean = true;
 
   login(){
     this.isAuthenticated = true

@@ -9,6 +9,7 @@ import { DeletedTasksComponent } from './components/deleted-tasks/deleted-tasks.
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guard/auth-guards.guard';
 import { authGuardChildGuard } from './guard/auth-guard-child.guard';
+import { authGuarConfirmGuard } from './guard/auth-guar-confirm.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     component: ListTaskComponent, 
     canActivate: [AuthGuard],
     canActivateChild: [authGuardChildGuard],
+    canDeactivate: [authGuarConfirmGuard],
     children: [ // se tiene que agregar <router-outlet></router-outlet> en el padre, en este caso la raiz es takList
       {
         path: 'completed',
