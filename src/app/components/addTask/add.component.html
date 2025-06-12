@@ -2,6 +2,8 @@
 <form class="container-input" [formGroup]="taskForm" (ngSubmit)="addTask()">
   <input formControlName="taskName" placeholder="Ingresar tarea" />
 
+  <input formControlName="description" placeholder="Ingresar descripcion" />
+
   <button type="submit" [disabled]="taskForm.invalid">Enviar</button>
 </form>
 

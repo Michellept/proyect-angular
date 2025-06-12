@@ -1,3 +1,10 @@
-<button class="add-button" (click)="openTask()" *ngIf="!open" > Agregar Tarea</button>
+<nav class="tabs">
+    <a routerLink="/task" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" > Todas</a>
+    <a routerLink="/task/completed" routerLinkActive="active"> Completadas</a>
+    <a routerLink="/task/deleted" routerLinkActive="active"> Eliminadas</a>
+
+</nav>
+
+<button class="add-button" (click)="openTask()" *ngIf="!open"> Agregar Tarea</button>
 
 <router-outlet></router-outlet>

@@ -26,17 +26,34 @@ export class ListTaskComponent {
 
   private subscription: Subscription;
 
+  view: boolean = true;
+
   constructor(
     private service: TasksService,
     private router: Router
   ) {
+
+        this.router.events.subscribe(() => {
+      if (this.router.url !== '/task') {
+        this.view = false;   
+      }else{
+        this.view = true
+      }
+    });
+
+
     this.tasks = this.service.getTasks();
     this.subscription = this.service.taskChanged.subscribe(
       (tasks: Task[]) => {
         this.tasks = tasks;
       }
     );
+
+
   }
+
+
+
 
   completeTask(task: Task): void {
     this.service.completeTask(task.id);
@@ -48,6 +65,9 @@ export class ListTaskComponent {
   editTask(id: number): void {
     console.log(id, 'edit');
     this.router.navigate([ `/edit/${id} `]);
-
   }
+    detailsTask(id: number): void {
+    this.router.navigate([`/task/details/${id}`]);
+  }
+
 }

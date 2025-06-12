@@ -20,6 +20,7 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       taskName: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['',[Validators.required]],
     });
   }
 
@@ -28,6 +29,7 @@ export class AddComponent implements OnInit {
       const newTask: Task = {
         id: Math.floor(Math.random() * 1000),
         title: this.taskForm.get('taskName')?.value,
+        description: this.taskForm.get('description')?.value,
         completed: false,
       };
       this.taskActive = false;

@@ -2,6 +2,7 @@
 <h1 class="title">Editar Tarea {{ task?.title }} {{ task?.id }}</h1>
 <form class="container-input" [formGroup]="taskForm" (ngSubmit)="updateTask()">
   <input formControlName="taskName" placeholder="Ingresar nuevo nombre de tarea" />
+  <input formControlName="description" placeholder="Ingresar nueva descripcion" />
 
   <button type="submit" [disabled]="taskForm.invalid">Editar</button>
 </form>

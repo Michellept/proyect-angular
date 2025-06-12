@@ -10,6 +10,9 @@ import { StatusTaksDirective } from './directives/status-taks.directive';
 import { ConfirmDeleteDirective } from './directives/confirm-delete.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { CompletedTaskComponent } from './components/completed-task/completed-task.component';
+import { DetailsTaskComponent } from './components/details-task/details-task.component';
+import { DeletedTasksComponent } from './components/deleted-tasks/deleted-tasks.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     ListTaskComponent,
     StatusTaksDirective,
     ConfirmDeleteDirective,
-    EditTaskComponent
+    EditTaskComponent,
+    CompletedTaskComponent,
+    DetailsTaskComponent,
+    DeletedTasksComponent
   ],
   imports: [
     BrowserModule,

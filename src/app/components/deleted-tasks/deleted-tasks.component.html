@@ -1,0 +1,22 @@
+<ng-container>
+  <h1 class="number-task">N° de Tareas: {{ tasksDeleted.length }}</h1>
+  <h2 class="title">Lista de Tareas Eliminadas</h2>
+
+  <div class="flex">
+    <div
+      class="container-tasks"
+      [ngStyle]="{
+        'justify-content': tasksDeleted.length === 0 ? 'center' : ''
+      }"
+    >
+      <div class="task" *ngFor="let task of tasksDeleted; let i = index">
+        <p>{{ task.id }}</p>
+        <span>{{ task.title }}</span>
+        <button class="task_details" (click)="returnTask(task)">Restaurar</button>
+      </div>
+      <span [ngStyle]="{ color: 'red' }" *ngIf="tasksDeleted.length === 0">
+        No hay tareas eliminadas
+      </span>
+    </div>
+  </div>
+</ng-container>

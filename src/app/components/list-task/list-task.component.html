@@ -1,3 +1,5 @@
+
+<ng-container *ngIf="view">
 <h1 class="number-task">N° de Tareas: {{ tasks.length }}</h1>
 <h2 class="title">Lista de Tareas</h2>
 
@@ -34,13 +36,19 @@
         (change)="completeTask(task)"
       />
       <button
+        class="task_details"
+        (click)="detailsTask(task.id)"
+      >
+        Detalles
+      </button>
+      <button class="task_edit" (click)="editTask(task.id)">Editar</button>
+            <button
         class="task_delete"
         (click)="deleteTask(task.id)"
         [appConfirmDelete]="task.title"
       >
         Eliminar
       </button>
-      <button class="task_edit" (click)="editTask(task.id)">Editar</button>
     </div>
     <span [ngStyle]="{ color: 'red' }" *ngIf="tasks.length === 0">
       No hay tareas
@@ -71,3 +79,7 @@
     </div>
   </div> -->
 </div>
+
+</ng-container>
+
+<router-outlet></router-outlet>

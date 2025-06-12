@@ -1,11 +1,36 @@
-.add-button{
-    position: absolute;
-    right: 40px;
-    bottom: 4px;
-    padding: 10px;
-    border: none;
-    outline: none;
-    background-color: lightslategray;
-    color: white;
-    cursor: pointer;
+.add-button {
+  position: absolute;
+  right: 40px;
+  bottom: 4px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: lightslategray;
+  color: white;
+  cursor: pointer;
+}
+
+.tabs {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+
+  a {
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 14px;
+  }
+
+  .active {
+    color: mediumseagreen;
+    border-bottom: 2px solid mediumseagreen;
+    font-weight: bold;
+  }
 }

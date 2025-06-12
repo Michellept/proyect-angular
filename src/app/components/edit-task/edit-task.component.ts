@@ -27,13 +27,13 @@ export class EditTaskComponent {
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       taskName: ['', [Validators.required]],
+      description: ['', [Validators.required]],
     });
 
     this.taskId = this.route.snapshot.paramMap.get('id');
     if (this.taskId) {
       this.task = this.service.getTaskById(parseInt(this.taskId, 10));
       if (this.task) {
-        console.log(this.task);
         this.taskForm.patchValue({ taskName: this.task.title });
       }
     }
@@ -46,6 +46,7 @@ export class EditTaskComponent {
       const newTask: Task = {
         id: parseInt(this.taskId, 10),
         title: this.taskForm.value.taskName,
+        description: this.taskForm.value.description,
         completed: this.task? this.task.completed : false,
       };
       this.service.editTask(newTask);

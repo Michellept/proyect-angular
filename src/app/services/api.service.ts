@@ -23,7 +23,9 @@ export class ApiService {
       map(data => data.map(task => ({
         id: task.id,
         title: task.title,
+        description: task.description,
         completed: task.completed
+
       }))),
       catchError(error => {
         console.error('Error cargando tareas externas:', error);
