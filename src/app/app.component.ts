@@ -1,27 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Task } from './models/task.interface';
+import { ApiService } from './services/api.service';
+import { TasksService } from './services/tasks.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'proyect-angular';
   cambio: boolean = false;
 
   tasks: Task[] = [];
+  taskUpLoad: Task[] = [];
+  open: boolean = false;
+  private subscription: Subscription;
+
+  constructor(
+    private apiService: ApiService,
+    private tasksService: TasksService,
+    private router: Router
+  ) {
+    this.subscription = this.tasksService.taskChanged.subscribe(
+      (tasks: Task[]) => {
+        this.tasks = tasks;
+      }
+    );
+    this.tasksService.getFormLocalStorage();
+  }
+  ngOnInit(): void {
+    this.tasks = this.tasksService.getTasks();
+    //this.loadTasks();
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  // loadTasks(): void {
+  //   this.apiService.loadTasks().subscribe({
+  //     next: (data) => {
+  //       if (Array.isArray(data)) {
+  //         this.taskUpLoad = data;
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('Error loading tasks:', error);
+  //     },
+  //   });
+  // }
+
+
+  openTask(){
+    this.open = true;
+    this.router.navigate(['/create']);
+  }
+
+  addTask(newTask: Task): void {
+    this.tasksService.addTask(newTask);
+  }
 
   onTaskAdded(newTask: Task): void {
-    this.tasks.push(newTask);
+    this.addTask(newTask);
   }
 
   markTaskAsCompleted(task: Task): void {
-    task.completed = !task.completed;
-
+    this.tasksService.completeTask(task.id);
   }
 
   deleteTask(id: number): void {
-    this.tasks = this.tasks.filter(task => task.id !== id);
+    this.tasksService.deleteTask(id);
   }
 }

@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusTaksDirective } from './directives/status-taks.directive';
 import { ConfirmDeleteDirective } from './directives/confirm-delete.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -16,14 +18,16 @@ import { ConfirmDeleteDirective } from './directives/confirm-delete.directive';
     AddComponent,
     ListTaskComponent,
     StatusTaksDirective,
-    ConfirmDeleteDirective
+    ConfirmDeleteDirective,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule,
+    HttpClientModule
 
   ],
   providers: [

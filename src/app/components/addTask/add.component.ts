@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../models/task.interface';
+import { TasksService } from '../../services/tasks.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -13,26 +15,24 @@ export class AddComponent implements OnInit {
   taskForm!: FormGroup;
   taskActive!: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private service: TasksService, private router:Router ) {}
 
   ngOnInit(): void {
-    // Inicializar el formulario, Formulario reactivo
     this.taskForm = this.fb.group({
       taskName: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
   addTask() {
-
     if (this.taskForm.valid && this.taskForm.get('taskName')?.value !== '') {
       const newTask: Task = {
         id: Math.floor(Math.random() * 1000),
         title: this.taskForm.get('taskName')?.value,
         completed: false,
-      }
+      };
       this.taskActive = false;
-      this.taskCreated.emit(newTask);
-      this.taskForm.reset();
+      this.service.addTask(newTask);
+      this.router.navigate(['/task']);
     } else {
       this.taskActive = true;
     }
@@ -41,5 +41,6 @@ export class AddComponent implements OnInit {
   ngOnDestroy(): void {
     console.log('bye, componente add task');
   }
+
 
 }

@@ -1,0 +1,19 @@
+<!-- Formulario de nueva tarea -->
+<h1 class="title">Editar Tarea {{ task?.title }} {{ task?.id }}</h1>
+<form class="container-input" [formGroup]="taskForm" (ngSubmit)="updateTask()">
+  <input formControlName="taskName" placeholder="Ingresar nuevo nombre de tarea" />
+
+  <button type="submit" [disabled]="taskForm.invalid">Editar</button>
+</form>
+
+<!-- Validaciones -->
+<div
+  *ngIf="
+    taskForm.get('taskName')?.invalid &&
+    taskForm.get('taskName')?.touched &&
+    taskForm.get('taskName')?.dirty
+  ">
+  <p class="error" *ngIf="taskForm.get('taskName')?.errors?.['required']">
+     El nombre para actualizar la tarea es requerido.
+  </p>
+</div>
