@@ -13,6 +13,7 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { CompletedTaskComponent } from './components/completed-task/completed-task.component';
 import { DetailsTaskComponent } from './components/details-task/details-task.component';
 import { DeletedTasksComponent } from './components/deleted-tasks/deleted-tasks.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DeletedTasksComponent } from './components/deleted-tasks/deleted-tasks.
     EditTaskComponent,
     CompletedTaskComponent,
     DetailsTaskComponent,
-    DeletedTasksComponent
+    DeletedTasksComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

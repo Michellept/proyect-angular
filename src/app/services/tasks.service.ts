@@ -13,6 +13,24 @@ export class TasksService {
   taskChanged = new Subject<Task[]>(); // Subject para emitir cambios a los componentes
   taskDeleted: Task[] = [];
   taskDeletedChanged = new Subject<Task[]>();
+
+  isAuthenticated : boolean = false; 
+  token:boolean = false;
+
+  login(){
+    this.isAuthenticated = true
+  }
+
+  isLoggedIn(): boolean{
+    return this.isAuthenticated    
+  }
+   
+  authRoutesChild():boolean{
+    return this.token
+  }
+
+  
+
   getTasks(): Task[] {
     return this.task;
   }

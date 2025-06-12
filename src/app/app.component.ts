@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   tasks: Task[] = [];
   taskUpLoad: Task[] = [];
   open: boolean = false;
+  view: boolean = true;
   private subscription: Subscription;
 
   constructor(
@@ -29,6 +30,14 @@ export class AppComponent implements OnInit, OnDestroy {
         this.tasks = tasks;
       }
     );
+    this.router.events.subscribe(() => {
+      if (this.router.url !== '/task') {
+        this.view = false;
+      }
+      if (this.router.url === '/task/completed' || this.router.url === '/task/deleted' || this.router.url === '/task') {
+        this.view = true;
+      }
+    })
     this.tasksService.getFormLocalStorage();
   }
   ngOnInit(): void {

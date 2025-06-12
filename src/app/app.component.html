@@ -1,3 +1,4 @@
+<ng-container *ngIf="view">
 <nav class="tabs">
     <a routerLink="/task" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" > Todas</a>
     <a routerLink="/task/completed" routerLinkActive="active"> Completadas</a>
@@ -6,5 +7,7 @@
 </nav>
 
 <button class="add-button" (click)="openTask()" *ngIf="!open"> Agregar Tarea</button>
+
+</ng-container>
 
 <router-outlet></router-outlet>
