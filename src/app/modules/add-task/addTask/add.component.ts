@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../../models/task.interface';
-import { TasksService } from '../../services/tasks.service';
+
 import { Router } from '@angular/router';
+import { Task } from '../../../models/task.interface';
+import { TasksService } from '../../../services/tasks.service';
 
 @Component({
   selector: 'app-add-task',

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
 import { ListTaskComponent } from './components/list-task/list-task.component';
-import { AddComponent } from './components/addTask/add.component';
-import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { CompletedTaskComponent } from './components/completed-task/completed-task.component';
 import { DetailsTaskComponent } from './components/details-task/details-task.component';
 import { DeletedTasksComponent } from './components/deleted-tasks/deleted-tasks.component';
@@ -25,7 +23,7 @@ const routes: Routes = [
       },
        {
         path: 'details/:id',
-        component: DetailsTaskComponent, 
+        component: DetailsTaskComponent,
       },
          {
         path: 'deleted',
@@ -35,12 +33,11 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: AddComponent,
+    loadChildren: () => import('./modules/add-task/add-task.module').then(m => m.AddTaskModule),
   },
    {
     path: 'edit/:id',
-    component: EditTaskComponent,
-  },
+    loadChildren: () => import('./modules/edit-task/edit-task.module').then(m => m.EditTaskModule),  },
   {
     path: 'login',
     component: LoginComponent,

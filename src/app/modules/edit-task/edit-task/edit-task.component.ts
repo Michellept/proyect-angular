@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TasksService } from '../../services/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Task } from '../../models/task.interface';
+import { TasksService } from '../../../services/tasks.service';
+import { Task } from '../../../models/task.interface';
 
 @Component({
   selector: 'app-edit-task',
