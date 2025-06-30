@@ -14,8 +14,9 @@ const routes: Routes = [
     path: 'task',
     component: ListTaskComponent, 
     canActivate: [AuthGuard],
-    canActivateChild: [authGuardChildGuard],
-  //  canDeactivate: [authGuarConfirmGuard],
+  // canActivateChild: [authGuardChildGuard],
+  //  canDeactivate: [authGuarConfirmGuard], 
+  // Las rutas hijas necesitan un <router-outlet> dentro del componente padre (ListTaskComponent) para renderizarse, por eso de agrega en ListTaskComponent.html el <router-outlet> para que las rutas hijas se muestren correctamente.
     children: [ 
       {
         path: 'completed',
