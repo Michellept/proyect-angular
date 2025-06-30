@@ -15,8 +15,8 @@ const routes: Routes = [
     component: ListTaskComponent, 
     canActivate: [AuthGuard],
     canActivateChild: [authGuardChildGuard],
-    canDeactivate: [authGuarConfirmGuard],
-    children: [ // se tiene que agregar <router-outlet></router-outlet> en el padre, en este caso la raiz es takList
+  //  canDeactivate: [authGuarConfirmGuard],
+    children: [ 
       {
         path: 'completed',
         component: CompletedTaskComponent, 
